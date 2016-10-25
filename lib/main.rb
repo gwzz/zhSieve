@@ -1,16 +1,46 @@
+#!/usr/bin/ruby
 require 'rubygems'
 require 'mechanize'
+require "./support"
 
-test_url = "http://google.com"
+if ARGV.length < 1
+  puts "Too few arguments"
+  exit
+end
+
+class SearchOption
+	def initialize(alist)
+		if alist.find { |e| /q/ =~ e }
+			@qid = alist.find { |e| /q/ =~ e }.gsub('q:','')
+		end
+		if alist.find { |e| /a/ =~ e }
+			@aid = alist.find { |e| /a/ =~ e }.gsub('a:','')
+		end
+	end
+	def questionid
+		@qid
+	end
+	def answerid
+		@aid
+	end
+end
+
+# set base information usded to connect
 BASE_URL = "https://www.zhihu.com"
+QUESTION_URL = "/question/51816561"
 LIST_URL = "#{BASE_URL}/question/51727516#answer-46414810"
 HEADERS_HASH = {"User-Agent" => "Chrome/53.0.2785.143"}
+
+arguments = ARGV
+
+
+
+search_opt = SearchOption.new(arguments)
 
 agent = Mechanize.new
 agent.user_agent = 'Chrome/53.0.2785.143'
 agent.max_history = 1
 agent.cookie_jar.load_cookiestxt("../cookies.txt")
-
-index_page = agent.get(BASE_URL)
-
-index_page.links.each do |link| puts link.text end
+search_page = agent.get(BASE_URL+QUESTION_URL)
+# search_page.links.each do |link| puts link.text end
+puts search_page.at_css('.zu-main-content , #zh-question-answer-wrap .clearfix')
