@@ -1,7 +1,8 @@
-#!/usr/bin/ruby
 require 'rubygems'
 require 'mechanize'
-require "./support"
+require_relative "support/support"
+require_relative "support/htmlpage"
+require_relative "support/html2md"
 
 if ARGV.length < 1
   puts "Too few arguments"
@@ -43,4 +44,6 @@ agent.max_history = 1
 agent.cookie_jar.load_cookiestxt("../cookies.txt")
 search_page = agent.get(BASE_URL+QUESTION_URL)
 # search_page.links.each do |link| puts link.text end
-puts search_page.at_css('.zu-main-content , #zh-question-answer-wrap .clearfix')
+testcontent = search_page.at_css('.zu-main-content , #zh-question-answer-wrap .clearfix')
+haha = HTMLPage.new(contents:search_page)
+puts haha.markdown!
