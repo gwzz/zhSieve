@@ -13,6 +13,6 @@ Create cookies.txt file and put it into root folder. (Mozilla cookies.txt-style)
 
 ### TO-DO List
 
-- [ ] Question
-- [ ] Ansewer
-- [ ] People
+- [ ] Question :rotating_light:
+- [ ] Ansewer :rotating_light:
+- [ ] People :construction:

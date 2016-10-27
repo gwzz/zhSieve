@@ -1,5 +1,5 @@
 require_relative 'html2md'
-
+require_relative 'people'
 class HTMLPage
   include HTML2Markdown::Converter
   attr_accessor :contents

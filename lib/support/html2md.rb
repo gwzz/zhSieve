@@ -1,4 +1,5 @@
 require 'nokogiri'
+require_relative 'people'
 
 module HTML2Markdown
 
@@ -13,7 +14,11 @@ module HTML2Markdown
     def people_to_markdown string_contents
       raise NoContents unless string_contents!=nil 
       doc = Nokogiri::HTML(string_contents,'UTF-8')
-      doc.children.map { |ele| parse_element(ele) }.join
+      testman = People.new
+      testman.name = "haha"
+      puts testman.name
+      puts parse_element(doc.at_css(".title-section .name"))
+      "#"+doc.at_css(".title-section .name")+"\n"+ doc.children.map { |ele| parse_element(ele) }.join
     end
 
     def parse_element(ele)

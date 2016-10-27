@@ -45,17 +45,16 @@ agent.user_agent = 'Chrome/53.0.2785.143'
 agent.max_history = 1
 agent.cookie_jar.load_cookiestxt("../cookies.txt")
 search_page = agent.get(BASE_URL+PEOPLE_URL)
-# search_page.links.each do |link| puts link.text end
-# testcontent = search_page.at_css('.zu-main-content , #zh-question-answer-wrap .clearfix')
+
 haha = HTMLPage.new(contents:search_page)
-peopleContent = haha.peopleMarkdown
-hahahtml = haha.to_html
-File.open("/Users/zhuwei/studying/open/zhSieve/testfile/people.html", "a+") do |w|
-    w.puts(hahahtml)
-end
+
+# hahahtml = haha.to_html
+# File.open("/Users/zhuwei/studying/open/zhSieve/testfile/people.html", "a+") do |w|
+#     w.puts(hahahtml)
+# end
 
 
-File.open("/Users/zhuwei/studying/open/zhSieve/testfile/people.md", "a+") do |w|
+File.open("/Users/zhuwei/studying/open/zhSieve/testfile/people.md", "w+") do |w|
     w.puts(haha.peopleMarkdown)
 end
 
