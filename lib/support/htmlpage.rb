@@ -6,11 +6,22 @@ class HTMLPage
 
   def initialize(options)
     doc = Nokogiri::HTML(options[:contents].body, 'UTF-8')
-    @contents = doc.to_s
+    @contents = options[:contents].body
+    # puts @contents.css(".title-section .name")
+    # File.open("/Users/zhuwei/studying/open/zhSieve/testfile/people.html", "a+") do |w|
+    #   w.puts(@contents)
+    # end
+  end
+
+  def peopleMarkdown
+    @markdown = people_to_markdown(@contents)
+  end
+
+  def to_html
+    @html =  @contents
   end
 
   def markdown
-    puts @contents
     @markdown ||= markdown!
   end
 

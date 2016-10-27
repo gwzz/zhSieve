@@ -5,8 +5,14 @@ module HTML2Markdown
   module Converter
 
     def to_markdown string_contents
-      raise NoContents unless string_contents!=nil and string_contents.is_a?(String)
-      doc = Nokogiri::HTML(string_contents)
+      raise NoContents unless string_contents!=nil 
+      doc = Nokogiri::HTML(string_contents,'UTF-8')
+      doc.children.map { |ele| parse_element(ele) }.join
+    end
+
+    def people_to_markdown string_contents
+      raise NoContents unless string_contents!=nil 
+      doc = Nokogiri::HTML(string_contents,'UTF-8')
       doc.children.map { |ele| parse_element(ele) }.join
     end
 
@@ -48,11 +54,11 @@ module HTML2Markdown
       when 'strong'
         result << "**#{contents}**\n"
       when 'h1'
-        result << "##{contents}\n"
+        result << "# #{contents}\n"
       when 'h2'
-        result << "###{contents}\n"
+        result << "## #{contents}\n"
       when 'h3'
-        result << "####{contents}\n"
+        result << "### #{contents}\n"
       when 'hr'
         result << "****\n"
       when 'br'
