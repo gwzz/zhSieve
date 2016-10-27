@@ -15,7 +15,7 @@ module HTML2Markdown
       raise NoContents unless string_contents!=nil 
       doc = Nokogiri::HTML(string_contents,'UTF-8')
       testman = People.new
-      testman.name = "haha"
+      testman.name = 'haha'
       puts testman.name
       puts parse_element(doc.at_css(".title-section .name"))
       "#"+doc.at_css(".title-section .name")+"\n"+ doc.children.map { |ele| parse_element(ele) }.join
