@@ -28,9 +28,11 @@ end
 
 # set base information usded to connect
 BASE_URL = "https://www.zhihu.com"
-QUESTION_URL = "/question/51816561"
-ANSWER_URL = ""
-PEOPLE_URL = "/people/gwzz"
+QUESTION_ID = "43830406"
+QUESTION_URI = "/question/#{QUESTION_ID}"
+ANSWER_ID = "46959669"
+ANSWER_URI = "#answer-#{ANSWER_ID}"
+PEOPLE_ID = "/people/onlyswan"
 LIST_URL = "#{BASE_URL}/question/51727516#answer-46414810"
 HEADERS_HASH = {"User-Agent" => "Chrome/53.0.2785.143"}
 
@@ -44,9 +46,13 @@ agent = Mechanize.new
 agent.user_agent = 'Chrome/53.0.2785.143'
 agent.max_history = 1
 agent.cookie_jar.load_cookiestxt("../cookies.txt")
-search_page = agent.get(BASE_URL+PEOPLE_URL)
+# search_page = agent.get(BASE_URL+PEOPLE_URL)
+search_page = agent.get("https://www.zhihu.com#{QUESTION_URI}#{ANSWER_URI}")
 
-haha = HTMLPage.new(contents:search_page)
+haha = HTMLPage.new(contents:search_page,answer_id:ANSWER_ID)
+haha.answerMarkdown
+# haha.peopleMarkdown
+
 
 # hahahtml = haha.to_html
 # File.open("/Users/zhuwei/studying/open/zhSieve/testfile/people.html", "a+") do |w|
@@ -55,6 +61,6 @@ haha = HTMLPage.new(contents:search_page)
 
 
 File.open("/Users/zhuwei/studying/open/zhSieve/testfile/people.md", "w+") do |w|
-    w.puts(haha.peopleMarkdown)
+    w.puts(haha.markdown!)
 end
 

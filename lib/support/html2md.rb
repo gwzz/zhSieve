@@ -1,5 +1,6 @@
 require 'nokogiri'
 require_relative 'people'
+require_relative 'answer'
 
 module HTML2Markdown
 
@@ -14,11 +15,23 @@ module HTML2Markdown
     def people_to_markdown string_contents
       raise NoContents unless string_contents!=nil 
       doc = Nokogiri::HTML(string_contents,'UTF-8')
-      testman = People.new
-      testman.name = 'haha'
-      puts testman.name
-      puts parse_element(doc.at_css(".title-section .name"))
+      search_user = People.new
+      # set people info
+      search_user.name = parse_element(doc.at_css(".title-section .name"))
+      search_user.bio = parse_element(doc.at_css(".bio.ellipsis"))
+      # search_user.location = parse_element(doc.at_css(".item .topic-link"))
+      # search_user.business = parse_element(doc.at_css(".business .zg-link-litblue-normal"))
+      # search_user.education = parse_element(doc.at_css(".icon-profile-education~ .info-empty-wrap .zg-link-litblue-normal"))
+      puts search_user.name
+
       "#"+doc.at_css(".title-section .name")+"\n"+ doc.children.map { |ele| parse_element(ele) }.join
+    end
+
+    def answer_to_markdown string_contents,answer_id
+      raise NoContents unless string_contents!=nil
+      doc = Nokogiri::HTML(string_contents,'UTF-8')
+      answer_nade = doc.search '[data-aid="'+answer_id.to_s+'"]'
+      search_answer = Answer.new
     end
 
     def parse_element(ele)
