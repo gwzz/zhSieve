@@ -14,5 +14,7 @@ Create cookies.txt file and put it into root folder. (Mozilla cookies.txt-style)
 ### TO-DO List
 
 - [ ] Question :rotating_light:
-- [ ] Ansewer :rotating_light:
+- [ ] Ansewer :construction:
+  *Use question_id and answer_id to crawler page information, and output a markdown file with ["question title and link", "author's avatar, name, biography", "answer content"].
+  *Testing:warning:!
 - [ ] People :construction:
