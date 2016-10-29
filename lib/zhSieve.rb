@@ -49,10 +49,12 @@ agent.cookie_jar.load_cookiestxt("../cookies.txt")
 # search_page = agent.get(BASE_URL+PEOPLE_URL)
 search_page = agent.get("https://www.zhihu.com#{QUESTION_URI}#{ANSWER_URI}")
 
-haha = HTMLPage.new(contents:search_page,answer_id:ANSWER_ID)
-haha.answerMarkdown
-# haha.peopleMarkdown
+haha = HTMLPage.new(contents:search_page,question_id:QUESTION_ID,answer_id:ANSWER_ID)
 
+# haha.peopleMarkdown
+File.open("/Users/zhuwei/studying/open/zhSieve/testfile/#{QUESTION_ID}_#{ANSWER_ID}.md", "w+") do |w|
+    w.puts(haha.answerMarkdown)
+end
 
 # hahahtml = haha.to_html
 # File.open("/Users/zhuwei/studying/open/zhSieve/testfile/people.html", "a+") do |w|
@@ -60,7 +62,7 @@ haha.answerMarkdown
 # end
 
 
-File.open("/Users/zhuwei/studying/open/zhSieve/testfile/people.md", "w+") do |w|
-    w.puts(haha.markdown!)
-end
+# File.open("/Users/zhuwei/studying/open/zhSieve/testfile/people.md", "w+") do |w|
+#     w.puts(haha.markdown!)
+# end
 

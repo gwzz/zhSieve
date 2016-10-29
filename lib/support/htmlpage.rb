@@ -20,7 +20,7 @@ class HTMLPage
   end
 
   def answerMarkdown
-    @markdown = answer_to_markdown(@contents,@answer_id)
+    @markdown = answer_to_markdown(@contents,@question_id,@answer_id)
   end
 
   def to_html

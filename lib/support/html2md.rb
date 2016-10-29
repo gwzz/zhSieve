@@ -27,11 +27,25 @@ module HTML2Markdown
       "#"+doc.at_css(".title-section .name")+"\n"+ doc.children.map { |ele| parse_element(ele) }.join
     end
 
-    def answer_to_markdown string_contents,answer_id
+    def answer_to_markdown string_contents,question_id,answer_id
       raise NoContents unless string_contents!=nil
       doc = Nokogiri::HTML(string_contents,'UTF-8')
       answer_nade = doc.search '[data-aid="'+answer_id.to_s+'"]'
       search_answer = Answer.new
+      # search and set question infomations
+      avatar_raw = answer_nade.search '[class="zm-list-avatar avatar"]'
+      author_raw = answer_nade.search '[class="author-link"]'
+      bio_raw = answer_nade.search '[class="bio"]'
+      content_raw = answer_nade.search '[class="zm-editable-content clearfix"]'
+      search_answer.question = doc.title.strip
+      search_answer.link = "https://www.zhihu.com/people/#{question_id}#answer-#{answer_id}"
+      search_answer.avatar= parse_element(avatar_raw.first)
+      search_answer.bio = parse_element(bio_raw.first)
+      search_answer.content = parse_element(content_raw.first)
+      author_info = parse_element(author_raw.first).split(/[\[\]\(\)]/)
+      search_answer.author = author_info[1]
+      search_answer.author_link = "https://www.zhihu.com" + author_info[3]
+      markdown_text = search_answer.format_markdown
     end
 
     def parse_element(ele)
