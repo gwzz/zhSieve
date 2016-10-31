@@ -23,5 +23,4 @@ module ZhSieve
 	# # search_page = agent.get(BASE_URL+PEOPLE_URL)
 	# search_page = agent.get("https://www.zhihu.com#{QUESTION_URI}#{ANSWER_URI}")
 	# haha = HTMLPage.new(contents:search_page,question_id:QUESTION_ID,answer_id:ANSWER_ID)
-  # Your code goes here...
 end
