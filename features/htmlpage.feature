@@ -4,5 +4,5 @@ Feature: HTMLPage
   I want to be as objective as possible
 
   Scenario: Kobe is Good
-    When I run `zhSieve portray haha`
-    Then the output should contain "Good!"
+    When I run `zhSieve portray 43830406`
+    Then the output should contain "43830406"

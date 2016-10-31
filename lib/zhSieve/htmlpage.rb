@@ -1,6 +1,7 @@
+require_relative 'html2md'
 module ZhSieve
   class HTMLPage
-  # include HTML2Markdown::Converter
+  include ZhSieve::Converter
     attr_accessor :contents,:question_id,:answer_id
 
     def initialize(options)
@@ -12,10 +13,6 @@ module ZhSieve
       # File.open("/Users/zhuwei/studying/open/zhSieve/testfile/people.html", "a+") do |w|
       #   w.puts(@contents)
       # end
-    end
-
-    def self.portray(name)
-      puts "Good!"
     end
 
     def peopleMarkdown
