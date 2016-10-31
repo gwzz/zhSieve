@@ -3,9 +3,9 @@ require 'zhSieve'
 
 module ZhSieve
   class CLI < Thor
-  	desc "portray ITEM", "Determines if a player is good or not"
-	def portray
-		puts ZhSieve::HTMLPage.portray
+  	desc "version", "Show current version"
+	def version
+		puts ZhSieve::VERSION
 	end
   end
 end

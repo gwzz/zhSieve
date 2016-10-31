@@ -4,7 +4,6 @@ require_relative 'answer'
 
 module ZhSieve
   module Converter
-
     def to_markdown string_contents
       raise NoContents unless string_contents!=nil 
       doc = Nokogiri::HTML(string_contents,'UTF-8')
@@ -16,14 +15,6 @@ module ZhSieve
       doc = Nokogiri::HTML(string_contents,'UTF-8')
       search_user = People.new
       # set people info
-      search_user.name = parse_element(doc.at_css(".title-section .name"))
-      search_user.bio = parse_element(doc.at_css(".bio.ellipsis"))
-      # search_user.location = parse_element(doc.at_css(".item .topic-link"))
-      # search_user.business = parse_element(doc.at_css(".business .zg-link-litblue-normal"))
-      # search_user.education = parse_element(doc.at_css(".icon-profile-education~ .info-empty-wrap .zg-link-litblue-normal"))
-      puts search_user.name
-
-      "#"+doc.at_css(".title-section .name")+"\n"+ doc.children.map { |ele| parse_element(ele) }.join
     end
 
     def answer_to_markdown string_contents,question_id,answer_id
