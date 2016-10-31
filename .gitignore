@@ -10,5 +10,4 @@
 
 # ignor local testing files
 localbackup
-cookies.txt
 /testfile
