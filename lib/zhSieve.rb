@@ -5,6 +5,7 @@ require 'mechanize'
 
 module ZhSieve
 	BASE_URL = "https://www.zhihu.com"
+	ZL_URI = "https://zhuanlan.zhihu.com"
 	def self.crawl_answer(options)
 		question_id = "#{options[:question_id]}"
 		question_uri = "/question/#{question_id}"
@@ -18,6 +19,14 @@ module ZhSieve
 		agent.cookie_jar.load_cookiestxt("./cookies.txt")
 		search_page = agent.get("#{search_uri}")
 		haha = HTMLPage.new(contents:search_page,question_id:question_id,answer_id:answer_id).answerMarkdown
+	end
+
+	def self.crawl_zl_people(options)
+
+	end
+
+	def self.crawl_zl_article(options)
+
 	end
 	# BASE_URL = "https://www.zhihu.com"
 	# question_id = "43830406"

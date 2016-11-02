@@ -2,7 +2,7 @@
 A ruby based zhihu content crawler
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/gwzz/zhSieve/blob/master/LICENSE)
-
+[![Gem Version](https://badge.fury.io/rb/zhSieve.svg)](https://badge.fury.io/rb/zhSieve)
 ###
 Status: under working :construction:
 
@@ -21,6 +21,9 @@ $ zhSieve answer -q 'Your Question Id' -a 'Your Answer Id'
   - Use question_id and answer_id to crawler page information, and output a markdown file with ["question title and link", "author's avatar, name, biography", "answer content"].
   - Testing:warning:!
 - [ ] People :construction:
+- [ ] ZhuanLan :construction: cantains two components
+  -	1. Crawler single article
+  - 2. Crawler someone's zhuanlan category
 
 
 ## Contributing
