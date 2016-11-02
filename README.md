@@ -10,7 +10,10 @@ Status: under working :construction:
 Create cookies.txt file and put it into root folder. (Mozilla cookies.txt-style)
 
 ### Usage
-
+Crawler specific answer, and output it as markdown format.
+```shell
+$ zhSieve answer -q 'Your Question Id' -a 'Your Answer Id'
+```
 ### TO-DO List
 
 - [ ] Question :rotating_light:
