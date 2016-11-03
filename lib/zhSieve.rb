@@ -26,7 +26,16 @@ module ZhSieve
 	end
 
 	def self.crawl_zl_article(options)
-
+		article_id = "#{options[:article_id]}"
+		article_uri = "/p/#{article_id}"
+		search_uri = "#{ZL_URI}#{article_uri}"
+		agent = Mechanize.new
+		agent.user_agent = 'Chrome/53.0.2785.143'
+		agent.max_history = 1
+		# Dir.chdir(File.dirname(__FILE__))
+		agent.cookie_jar.load_cookiestxt("./cookies.txt")
+		search_page = agent.get("#{search_uri}")
+		haha = HTMLPage.new(contents:search_page,article_id:article_id).articleMarkdown
 	end
 	# BASE_URL = "https://www.zhihu.com"
 	# question_id = "43830406"

@@ -38,6 +38,10 @@ module ZhSieve
       markdown_text = search_answer.format_markdown
     end
 
+    def article_to_markdown string_contents,article_id
+      puts article_id
+    end
+
     def parse_element(ele)
       if ele.is_a? Nokogiri::XML::Text
         return "#{ele.text}\n"
