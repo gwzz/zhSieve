@@ -1,6 +1,8 @@
 require 'nokogiri'
+require 'json'
 require_relative 'people'
 require_relative 'answer'
+require_relative 'article'
 
 module ZhSieve
   module Converter
@@ -20,13 +22,13 @@ module ZhSieve
     def answer_to_markdown string_contents,question_id,answer_id
       raise NoContents unless string_contents!=nil
       doc = Nokogiri::HTML(string_contents,'UTF-8')
-      answer_nade = doc.search '[data-aid="'+answer_id.to_s+'"]'
+      answer_node = doc.search '[data-aid="'+answer_id.to_s+'"]'
       search_answer = Answer.new
       # search and set question infomations
-      avatar_raw = answer_nade.search '[class="zm-list-avatar avatar"]'
-      author_raw = answer_nade.search '[class="author-link"]'
-      bio_raw = answer_nade.search '[class="bio"]'
-      content_raw = answer_nade.search '[class="zm-editable-content clearfix"]'
+      avatar_raw = answer_node.search '[class="zm-list-avatar avatar"]'
+      author_raw = answer_node.search '[class="author-link"]'
+      bio_raw = answer_node.search '[class="bio"]'
+      content_raw = answer_node.search '[class="zm-editable-content clearfix"]'
       search_answer.question = doc.title.strip
       search_answer.link = "https://www.zhihu.com/people/#{question_id}#answer-#{answer_id}"
       search_answer.avatar= parse_element(avatar_raw.first)
@@ -39,7 +41,22 @@ module ZhSieve
     end
 
     def article_to_markdown string_contents,article_id
-      puts article_id
+      raise NoContents unless string_contents!=nil
+      doc_hash = JSON.parse(string_contents)
+      search_article = Article.new
+      search_article.title = doc_hash["title"]
+      search_article.title_image = "![](#{doc_hash["titleImage"]})"
+      search_article.published_time = doc_hash['publishedTime']
+      search_article.link = "https://zhuanlan.zhihu.com/p/#{article_id}"
+      search_article.content = doc_hash["content"]
+      search_article.author = doc_hash["author"]["name"]
+      search_article.bio = doc_hash["author"]["bio"] || "No Bio!"
+      search_article.author_link = doc_hash["author"]["profileUrl"]
+      avatar_template = doc_hash["author"]["avatar"]["template"].gsub('{size}','s')
+      avatar_id = doc_hash["author"]["avatar"]["id"]
+      avatar_uri = avatar_template.gsub('{id}', "#{avatar_id}")
+      search_article.avatar = "![](#{avatar_uri})"
+      markdown_text = search_article.format_markdown
     end
 
     def parse_element(ele)

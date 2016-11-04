@@ -5,7 +5,7 @@ require 'mechanize'
 
 module ZhSieve
 	BASE_URL = "https://www.zhihu.com"
-	ZL_URI = "https://zhuanlan.zhihu.com"
+	ZL_URI = "https://zhuanlan.zhihu.com/api/posts/"
 	def self.crawl_answer(options)
 		question_id = "#{options[:question_id]}"
 		question_uri = "/question/#{question_id}"
@@ -27,8 +27,7 @@ module ZhSieve
 
 	def self.crawl_zl_article(options)
 		article_id = "#{options[:article_id]}"
-		article_uri = "/p/#{article_id}"
-		search_uri = "#{ZL_URI}#{article_uri}"
+		search_uri = "#{ZL_URI}#{article_id}"
 		agent = Mechanize.new
 		agent.user_agent = 'Chrome/53.0.2785.143'
 		agent.max_history = 1

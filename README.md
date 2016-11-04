@@ -16,17 +16,17 @@ $ zhSieve answer -q 'Your Question Id' -a 'Your Answer Id'
 ```
 Crawler specific Zhuanlan article, and output it as markdown format.
 ```shell
-$ zhSieve answer -z 'Your Question Id'
+$ zhSieve article -z 'Your Article Id'
 ```
 ### TO-DO List
 
 - [ ] Question :rotating_light:
-- [ ] Ansewer :construction:
+- [ ] Ansewer :checkered_flag:
   - Use question_id and answer_id to crawler page information, and output a markdown file with ["question title and link", "author's avatar, name, biography", "answer content"].
   - Testing:warning:!
 - [ ] People :construction:
 - [ ] ZhuanLan, cantains two components
-  -	1. Crawler single article :construction:
+  -	1. Crawler single article :checkered_flag:
   - 2. Crawler someone's zhuanlan category :rotating_light:
 
 

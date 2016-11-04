@@ -12,7 +12,7 @@ class Answer
 	end
 
 	def format_markdown
-		res_file = "## " + "[#{question}](" + @link + ")" + "\n"
+		res_file = "## " + "[#{@question}](" + @link + ")" + "\n"
 		res_file += "### "+@avatar + "[#{@author}](" + @author_link + ")"  + "\n"
 		res_file += "#### "+@bio + "\n"
 		res_file += "*****\n"
