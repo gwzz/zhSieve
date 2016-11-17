@@ -15,7 +15,6 @@ module ZhSieve
 		agent = Mechanize.new
 		agent.user_agent = 'Chrome/53.0.2785.143'
 		agent.max_history = 1
-		# Dir.chdir(File.dirname(__FILE__))
 		agent.cookie_jar.load_cookiestxt("./cookies.txt")
 		search_page = agent.get("#{search_uri}")
 		haha = HTMLPage.new(contents:search_page,question_id:question_id,answer_id:answer_id).answerMarkdown
